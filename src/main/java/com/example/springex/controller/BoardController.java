@@ -1,6 +1,7 @@
 package com.example.springex.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,6 +38,22 @@ public class BoardController {
 		return "BoardController:delete";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/view")
+	public String view(@RequestParam(value="no",required=true,defaultValue="123")/*Long 이더라도 String 으로 defalutValue 설정*/ Long no) {
+		System.out.println(no);
+		return "BoardController:view";
+	}
+	
+	@ResponseBody
+	//http://localhost:8089/hellospring/board/view2/10
+	@RequestMapping("/view2/{id}/{no}")
+	public String view2(@PathVariable("no") Long no,
+			@PathVariable("id") String id) {
+		System.out.println(no);
+		System.out.println(id);
+		return "BoardController:view2";
+	}
 	
 	
 }
